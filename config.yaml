@@ -1,0 +1,231 @@
+# 语言配置
+languages:
+  zh_cn:
+    name: "简体中文"
+    code: "zh_CN"
+  zh_tw:
+    name: "繁體中文"
+    code: "zh_TW"
+  en:
+    name: "English"
+    code: "en_US"
+
+usage_steps:
+  en:
+    - "1. Select the TXT file containing watermark content to be added to PDF"
+    - "2. Select the target PDF file"
+    - "3. Select the output destination folder"
+    - "4. You can adjust watermark position (X, Y), font size and rotation angle"
+    - "7. Click Start button to process"
+    - "9. The log area will show detailed processing information"
+  zh_tw:
+    - "1. 選擇想要加到PDF上的水印內容文字檔txt"
+    - "2. 選擇目標的PDF"
+    - "3. 選擇檔案輸出的目的地資料夾"
+    - "4. 可以選擇水印的X、Y座標，字體大小傾斜度"
+    - "7. 點擊開始按鈕處理"
+    - "9. 日誌區域會顯示詳細的處理過程"
+    
+  zh_cn:
+    - "1. 选择想要加到PDF上的水印内容文字档txt"
+    - "2. 选择目标的PDF"
+    - "3. 选择档案输出的目的地资料夹"
+    - "4. 可以选择水印的X、Y座标，字体大小倾斜度"
+    - "7. 点击开始按钮处理"
+    - "9. 日志区域会显示详细的处理过程"
+app:
+  name: "Batch PDF Watermark"
+  version: "1.0"
+  copyright: "Copyright © 2025 HuHu Tech."
+
+ui:
+  window:
+    title:
+      zh_cn: "批量PDF水印工具"
+      zh_tw: "批量PDF水印工具"
+      en: "Batch PDF Watermark Tool"
+    width: 800
+    height: 600
+
+  layout:
+    watermark_content:
+      label:
+        zh_cn: "水印内容文字："
+        zh_tw: "水印内容文字："
+        en: "Watermark Content:"
+      placeholder:
+        zh_cn: "点击浏览选择源目录"
+        zh_tw: "點擊瀏覽選擇源目錄"
+        en: "Click to browse source directory"
+      button:
+        zh_cn: "浏览"
+        zh_tw: "瀏覽"
+        en: "Browse"
+    target_pdf:
+      label:
+        zh_cn: "目标PDF："
+        zh_tw: "目標PDF："
+        en: "Target PDF:"
+      placeholder:
+        zh_cn: "点击浏览选择目标PDF"
+        zh_tw: "點擊瀏覽選擇目標PDF"
+        en: "Click to browse target PDF"
+      button:
+        zh_cn: "浏览"
+        zh_tw: "瀏覽"
+        en: "Browse"
+    output_dir:
+      label:
+        zh_cn: "目的地資料夾："
+        zh_tw: "目的地資料夾："
+        en: "Output Directory:"
+      placeholder:
+        zh_cn: "請選擇目的地資料夾"
+        zh_tw: "請選擇目的地資料夾"
+        en: "Please select output directory"
+      button:
+        zh_cn: "浏览"
+        zh_tw: "瀏覽"
+        en: "Browse"
+
+  buttons:
+    start_copy:
+      zh_cn: "开始"
+      zh_tw: "開始"
+      en: "Start"
+    clear_log:
+      zh_cn: "清除日志"
+      zh_tw: "清除日誌"
+      en: "Clear Log"
+
+  menu:
+    file:
+      zh_cn: "文件"
+      zh_tw: "檔案"
+      en: "File"
+    exit:
+      zh_cn: "退出"
+      zh_tw: "結束"
+      en: "Exit"
+    help:
+      zh_cn: "帮助"
+      zh_tw: "說明"
+      en: "Help"
+    usage:
+      zh_cn: "使用说明"
+      zh_tw: "使用說明"
+      en: "Usage Guide"
+    about:
+      zh_cn: "关于"
+      zh_tw: "關於"
+      en: "About"
+    language:
+      zh_cn: "语言"
+      zh_tw: "語言"
+      en: "Language"
+
+  status:
+    ready:
+      zh_cn: "就绪"
+      zh_tw: "就緒"
+      en: "Ready"
+    complete:
+      zh_cn: "完成"
+      zh_tw: "完成"
+      en: "Complete"
+    error:
+      zh_cn: "错误: {}"
+      zh_tw: "錯誤: {}"
+      en: "Error: {}"
+
+  messages:
+    success:
+      zh_cn: "水印完成"
+      zh_tw: "水印完成"
+      en: "Watermark Complete"
+    error:
+      zh_cn: "发生错误"
+      zh_tw: "發生錯誤"
+      en: "Error Occurred"
+    no_output_dir:
+      zh_cn: "請選擇水印內容文字、PDF和有效的目的地資料夾"
+      zh_tw: "請選擇水印內容文字、PDF和有效的目的地資料夾"
+      en: "Please select watermark content, PDF and a valid output directory"
+
+  dialog:
+    select_txt:
+      title:
+        zh_cn: "選擇TXT檔案"
+        zh_tw: "選擇TXT檔案"
+        en: "Select TXT File"
+    select_pdf:
+      title:
+        zh_cn: "選擇PDF檔案"
+        zh_tw: "選擇PDF檔案"
+        en: "Select PDF File"
+    select_output_dir:
+      title:
+        zh_cn: "選擇目的地資料夾"
+        zh_tw: "選擇目的地資料夾"
+        en: "Select Output Directory"
+
+  style:
+    button:
+      normal: |
+        QPushButton {
+            background-color: #f0f0f0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 4px 8px;
+            min-width: 80px;
+            color: black;
+        }
+        QPushButton:hover {
+            background-color: #e0e0e0;
+        }
+        QPushButton:pressed {
+            background-color: #d0d0d0;
+        }
+        QPushButton:disabled {
+            background-color: #f8f8f8;
+            color: #999;
+        }
+      primary: |
+        QPushButton {       
+            background-color: #90EE90;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 4px 8px;
+            min-width: 80px;
+            font-weight: bold;
+            color: black;
+        }
+        QPushButton:hover {
+            background-color: #98FB98;
+        }
+        QPushButton:pressed {
+            background-color: #98FB98;
+        }
+        QPushButton:disabled {
+            background-color: #cccccc;
+            color: #666666;
+        }
+      select: |
+        QPushButton {
+            background-color: #90EE90;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 4px 8px;
+            min-width: 80px;
+            color: black;
+        }
+        QPushButton:hover {
+            background-color: #98FB98;
+        }
+        QPushButton:pressed {
+            background-color: #7CCD7C;
+        }
+        QPushButton:disabled {
+            background-color: #cccccc;
+            color: #666666;
+        }

@@ -58,45 +58,43 @@ class WatermarkCore():
         self.water_r = int(thePath['water_r'])
         self.water_font_size = int(thePath['water_font_size'])
         self.water_trans = int(thePath['water_trans']) / 100
+        self.output_dir = thePath['output_dir']
             
         return
 
     # 创建水印信息
-    def create_watermark(self,content):
-        """水印信息"""
-        # 默认大小为21cm*29.7cm
-        file_name = "mark.pdf"
-        # 水印PDF页面大小
-        c = canvas.Canvas(file_name, pagesize=(30 * cm, 30 * cm))
-        # 移动坐标原点(坐标系左下为(0,0))
-        # c.translate(4 * cm, 0 * cm)
-        c.translate( self.water_x * cm, self.water_y * cm)
-        # 设置字体格式与大小,中文需要加载能够显示中文的字体，否则就会乱码，注意字体路径
+    def create_watermark(self, content):
+        """根據水印內容產生水印PDF，並存到 output_dir，回傳完整路徑"""
+        # 取得原始PDF檔名（不含副檔名）
+        pdf_base = os.path.splitext(os.path.basename(self.pdf_path))[0]
+        # 新檔名：原檔名_水印內容.pdf
+        mark_pdf_name = f"{pdf_base}_{content}.pdf"
+        # 組合完整路徑
+        mark_pdf_path = os.path.join(self.output_dir, mark_pdf_name)
+
+        # 確保 output_dir 存在
+        os.makedirs(self.output_dir, exist_ok=True)
+
+        # 頁面大小
+        from reportlab.pdfgen import canvas
+        from reportlab.lib.units import cm
+        c = canvas.Canvas(mark_pdf_path, pagesize=(30 * cm, 30 * cm))
+        c.translate(self.water_x * cm, self.water_y * cm)
         try:
+            import reportlab.pdfbase.pdfmetrics
+            import reportlab.pdfbase.ttfonts
             reportlab.pdfbase.pdfmetrics.registerFont(
                 reportlab.pdfbase.ttfonts.TTFont('STHeiti', self.font_path))
             c.setFont('STHeiti', self.water_font_size)
         except:
-            # 默认字体，只能够显示英文
             print("沒有找到中文字體:STHeiti")
             c.setFont("Helvetica", self.water_font_size)
-            # content = "watermark"
-    
-        # 旋转角度度,坐标系被旋转
         c.rotate(self.water_r)
-
-        # 指定填充颜色
         c.setFillColorRGB(0, 0, 0)
-
-        # 设置透明度,1为不透明
         c.setFillAlpha(self.water_trans)
-
-        # 画几个文本,注意坐标系旋转的影响
         c.drawString(0 * cm, 3 * cm, content)
-
-        # 关闭并保存pdf文件
         c.save()
-        return file_name
+        return mark_pdf_path
 
     # 插入水印
     def add_watermark(self,pdf_file_in, pdf_file_mark, pdf_file_out):
@@ -122,3 +120,33 @@ class WatermarkCore():
         return True
 
   
+if __name__ == "__main__":
+    # 預設參數
+    params = {
+        'txt_path': 'TEST/name.txt',           # 預設的名字檔案
+        'pdf_path': 'TEST/sample.pdf',          # 預設的 PDF 檔案
+        'font_path': 'STHeiti.ttc', # 預設字體路徑
+        'water_x': 5,                     # 水印 X 座標
+        'water_y': 5,                     # 水印 Y 座標
+        'water_r': 30,                    # 水印旋轉角度
+        'water_font_size': 100,           # 水印字體大小
+        'water_trans': 50,                 # 水印透明度 (百分比)
+        'output_dir': 'TEST/output',  # 新增：目的地資料夾
+    }
+
+    # 建立 WatermarkCore 實例
+    wm = WatermarkCore(**params)
+
+    # 讀取名字檔案
+    with open(params['txt_path'], 'r', encoding='utf-8') as f:
+        names = [line.strip() for line in f if line.strip()]
+
+    # 對每個名字產生水印並加到 PDF
+    for name in names:
+        mark_pdf = wm.create_watermark(name)
+        # out_pdf 路徑同理組合
+        pdf_base = os.path.splitext(os.path.basename(params['pdf_path']))[0]
+        output_pdf_name = f"{pdf_base}_{name}.pdf"
+        output_pdf_path = os.path.join(params['output_dir'], output_pdf_name)
+        wm.add_watermark(params['pdf_path'], mark_pdf, output_pdf_path)
+        print(f"已產生: {output_pdf_path}")
