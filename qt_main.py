@@ -32,8 +32,14 @@ class WatermarkGUI(QMainWindow):
             return 'zh_cn'
         return 'en'
 
+    def resource_path(self, relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
+
     def load_config(self):
-        with open('config.yaml', 'r', encoding='utf-8') as f:
+        config_path = self.resource_path('config.yaml')
+        with open(config_path, 'r', encoding='utf-8') as f:
             self.config = yaml.safe_load(f)
 
     def get_text(self, key_path):
