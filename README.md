@@ -14,5 +14,10 @@ v1.0 2025 05 12
 
 ## 下載
 
+[Mac M Chip APP 下載](https://github.com/gumpcpy/batch-pdf-watermark/releases/download/v1.0/Batch.PDF.Watermark.dmg)
+
 ## 截圖
 
+<img width="603" alt="main_window" src="https://github.com/user-attachments/assets/c25c5a81-0683-4590-b4de-2157b5a8ef9a" />
+<img width="161" alt="namelist" src="https://github.com/user-attachments/assets/e08b443d-2307-4d54-928c-1d00fc370640" />
+<img width="917" alt="pdf" src="https://github.com/user-attachments/assets/8ed12108-dba0-4807-ba46-0a60ed63c9e3" />
